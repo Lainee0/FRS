@@ -1,3 +1,11 @@
+C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\FamilyRegistrySystem.exe.config
+C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\FamilyRegistrySystem.exe
+C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\FamilyRegistrySystem.pdb
+C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\MaterialSkin.dll
+C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\ReaLTaiizor.dll
+C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\ReaLTaiizor.xml
+C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\System.Configuration.ConfigurationManager.xml
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.csproj.AssemblyReference.cache
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.FamilyDetailsForm.resources
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.FamilyMembersForm.resources
@@ -6,11 +14,6 @@ C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\ob
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.Properties.Resources.resources
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.csproj.GenerateResource.cache
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.csproj.CoreCompileInputs.cache
-C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\FamilyRegistrySystem.exe.config
-C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\FamilyRegistrySystem.exe
-C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\FamilyRegistrySystem.pdb
-C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\System.Configuration.ConfigurationManager.dll
-C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\bin\Debug\System.Configuration.ConfigurationManager.xml
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRe.D2B4DE50.Up2Date
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.exe
 C:\Users\Administrator\source\repos\FamilyRegistrySystem\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.pdb

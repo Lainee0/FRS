@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MaterialSkin;
+using MaterialSkin.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +13,7 @@ using System.Windows.Forms;
 
 namespace FamilyRegistrySystem
 {
-    public partial class MainForm : Form
+    public partial class MainForm : MaterialForm
     {
         private DatabaseHelper dbHelper = new DatabaseHelper();
 
@@ -19,6 +21,17 @@ namespace FamilyRegistrySystem
         {
             InitializeComponent();
             LoadFamilies();
+
+            var skin = MaterialSkinManager.Instance;
+            skin.AddFormToManage(this);
+            //skin.Theme = MaterialSkinManager.Themes.DARK;
+            skin.ColorScheme = new ColorScheme(
+                Primary.Blue800,
+                Primary.Blue900,
+                Primary.Blue500,
+                Accent.Blue200,
+                TextShade.WHITE
+            );
         }
 
         private void LoadFamilies()
