@@ -75,6 +75,11 @@
             // cmbCivilStatus
             // 
             this.cmbCivilStatus.FormattingEnabled = true;
+            this.cmbCivilStatus.Items.AddRange(new object[] {
+            "Single",
+            "Married",
+            "Widow",
+            "Separated"});
             this.cmbCivilStatus.Location = new System.Drawing.Point(122, 344);
             this.cmbCivilStatus.Name = "cmbCivilStatus";
             this.cmbCivilStatus.Size = new System.Drawing.Size(142, 21);
@@ -167,6 +172,37 @@
             // cmbBarangay
             // 
             this.cmbBarangay.FormattingEnabled = true;
+            this.cmbBarangay.Items.AddRange(new object[] {
+            "Abijilan",
+            "Antipolo",
+            "Basiao",
+            "Cagwang",
+            "Calma",
+            "Cambuyo",
+            "Canayaon East",
+            "Canayaon West",
+            "Candanas",
+            "Candulao",
+            "Catmon",
+            "Cayam",
+            "Cupa",
+            "Datag",
+            "Estaca",
+            "Libertad",
+            "Lungsodaan East",
+            "Lungsodaan West",
+            "Malinao",
+            "Manaba",
+            "Pasong",
+            "Poblacion East",
+            "Poblacion West",
+            "Sacaon",
+            "Sampong",
+            "Tabuan",
+            "Togbongon",
+            "Ulbujan East",
+            "Ulbujan West",
+            "Victoria"});
             this.cmbBarangay.Location = new System.Drawing.Point(122, 96);
             this.cmbBarangay.Name = "cmbBarangay";
             this.cmbBarangay.Size = new System.Drawing.Size(312, 21);
@@ -235,6 +271,9 @@
             // cmbSex
             // 
             this.cmbSex.FormattingEnabled = true;
+            this.cmbSex.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
             this.cmbSex.Location = new System.Drawing.Point(122, 312);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(142, 21);
@@ -268,6 +307,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FamilyDetailsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FamilyDetailsForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -173,6 +173,11 @@
             // cmbCivilStatus
             // 
             this.cmbCivilStatus.FormattingEnabled = true;
+            this.cmbCivilStatus.Items.AddRange(new object[] {
+            "Single",
+            "Married",
+            "Widow",
+            "Separated"});
             this.cmbCivilStatus.Location = new System.Drawing.Point(122, 265);
             this.cmbCivilStatus.Name = "cmbCivilStatus";
             this.cmbCivilStatus.Size = new System.Drawing.Size(142, 21);
@@ -209,6 +214,15 @@
             // cmbRelationship
             // 
             this.cmbRelationship.FormattingEnabled = true;
+            this.cmbRelationship.Items.AddRange(new object[] {
+            "1 - Puno ng Pamilya",
+            "2 - Asawa",
+            "3 - Anak",
+            "4 - Kapatid",
+            "5 - Bayaw o Hipag",
+            "6 - Apo",
+            "7 - Ama / Ina",
+            "8 - Iba pang Kamag-anak"});
             this.cmbRelationship.Location = new System.Drawing.Point(122, 163);
             this.cmbRelationship.Name = "cmbRelationship";
             this.cmbRelationship.Size = new System.Drawing.Size(142, 21);
@@ -217,6 +231,9 @@
             // cmbSex
             // 
             this.cmbSex.FormattingEnabled = true;
+            this.cmbSex.Items.AddRange(new object[] {
+            "Male",
+            "Female"});
             this.cmbSex.Location = new System.Drawing.Point(122, 233);
             this.cmbSex.Name = "cmbSex";
             this.cmbSex.Size = new System.Drawing.Size(142, 21);
@@ -248,6 +265,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "MemberDetailsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MemberDetailsForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
