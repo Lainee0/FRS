@@ -1,15 +1,18 @@
-﻿using System;
+﻿using ExcelDataReader;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.ComTypes;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using OfficeOpenXml;
 
 namespace FamilyRegistrySystem
 {
@@ -134,132 +137,99 @@ namespace FamilyRegistrySystem
         {
             try
             {
-                // 1. Configure and show file dialog
                 using (OpenFileDialog openFileDialog = new OpenFileDialog())
                 {
-                    openFileDialog.Filter = "CSV files (*.csv)|*.csv|Excel files (*.xlsx)|*.xlsx";
-                    openFileDialog.Title = "Select Household Data File";
-
+                    openFileDialog.Filter = "Excel Files|*.xls;*.xlsx";
                     if (openFileDialog.ShowDialog() == DialogResult.OK)
                     {
-                        // 2. Extract barangay name from filename (format: "BarangayName_*.csv")
-                        string fileName = Path.GetFileNameWithoutExtension(openFileDialog.FileName);
-                        string barangayName = fileName.Split('_')[0]; // Assumes format "BarangayName_restoffilename"
+                        // Store file path since OpenFileDialog will be disposed
+                        string filePath = openFileDialog.FileName;
 
-                        // 3. Read file based on extension
-                        DataTable importedData;
+                        // Get barangay name from filename
+                        string barangayName = Path.GetFileNameWithoutExtension(filePath).Split('_')[0];
 
-                        if (openFileDialog.FileName.EndsWith(".csv"))
+                        // Read Excel file and process data
+                        using (var stream = File.Open(filePath, FileMode.Open, FileAccess.Read))
                         {
-                            importedData = ReadCsvFile(openFileDialog.FileName);
-                        }
-                        else // Excel
-                        {
-                            importedData = ReadExcelFile(openFileDialog.FileName);
+                            using (var reader = ExcelReaderFactory.CreateReader(stream))
+                            {
+                                var result = reader.AsDataSet(new ExcelDataSetConfiguration()
+                                {
+                                    ConfigureDataTable = (_) => new ExcelDataTableConfiguration()
+                                    {
+                                        UseHeaderRow = true
+                                    }
+                                });
+
+                                // Process first sheet
+                                DataTable excelData = result.Tables[0];
+
+                                // DEBUG: Show what was read from Excel
+                                StringBuilder debugInfo = new StringBuilder();
+                                debugInfo.AppendLine($"Rows read: {excelData.Rows.Count}");
+                                debugInfo.AppendLine("First 5 rows:");
+
+                                for (int i = 0; i < Math.Min(5, excelData.Rows.Count); i++)
+                                {
+                                    debugInfo.AppendLine($"Row {i}: {string.Join("|", excelData.Rows[i].ItemArray)}");
+                                }
+
+                                MessageBox.Show(debugInfo.ToString(), "Debug - Excel Data Read");
+
+                                // Process data after verification
+                                ProcessExcelData(excelData, barangayName);
+                            }
                         }
 
-                        // 4. Process and validate data
-                        if (importedData.Rows.Count > 0)
-                        {
-                            // Get or create barangay ID
-                            int barangayId = GetOrCreateBarangay(barangayName);
-
-                            // Process each household
-                            ProcessImportedData(importedData, barangayId);
-
-                            MessageBox.Show($"Successfully imported {importedData.Rows.Count} records for {barangayName}",
-                                          "Import Successful",
-                                          MessageBoxButtons.OK,
-                                          MessageBoxIcon.Information);
-
-                            // Refresh the view
-                            LoadFamilies();
-                        }
-                        else
-                        {
-                            MessageBox.Show("No valid data found in the selected file.",
-                                          "Import Failed",
-                                          MessageBoxButtons.OK,
-                                          MessageBoxIcon.Warning);
-                        }
+                        MessageBox.Show("Import completed successfully!");
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error during import: {ex.Message}",
-                                "Import Error",
-                                MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                MessageBox.Show($"Import failed: {ex.Message}");
             }
         }
 
-        // Helper method to read CSV files
-        private DataTable ReadCsvFile(string filePath)
+        private void ProcessExcelData(DataTable excelData, string barangayName)
         {
-            DataTable dt = new DataTable();
+            string connectionString = GetConnectionString();
 
-            using (StreamReader sr = new StreamReader(filePath))
+            // Debug: Show incoming parameters
+            MessageBox.Show($"Starting import for {barangayName}, {excelData.Rows.Count} rows", "Debug - Start Import");
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // Read headers
-                string[] headers = sr.ReadLine().Split(',');
-                foreach (string header in headers)
+                connection.Open();
+                using (SqlTransaction transaction = connection.BeginTransaction())
                 {
-                    dt.Columns.Add(header.Trim());
-                }
-
-                // Read data rows
-                while (!sr.EndOfStream)
-                {
-                    string[] rows = sr.ReadLine().Split(',');
-                    DataRow dr = dt.NewRow();
-                    for (int i = 0; i < headers.Length; i++)
+                    try
                     {
-                        dr[i] = rows[i].Trim();
+                        int barangayId = GetOrCreateBarangay(barangayName, connection, transaction);
+                        int savedRows = 0;
+
+                        foreach (DataRow row in excelData.Rows)
+                        {
+                            if (SaveHouseholdMember(row, barangayId, connection, transaction))
+                                savedRows++;
+                        }
+
+                        transaction.Commit();
+                        MessageBox.Show($"Successfully saved {savedRows}/{excelData.Rows.Count} rows", "Debug - Import Complete");
                     }
-                    dt.Rows.Add(dr);
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        MessageBox.Show($"Error during import: {ex.Message}\n\nNo changes were saved.", "Import Error");
+                    }
                 }
             }
-
-            return dt;
         }
 
-        // Helper method to read Excel files (requires Microsoft.Office.Interop.Excel or EPPlus)
-        private DataTable ReadExcelFile(string filePath)
-        {
-            DataTable dt = new DataTable();
-
-            // Using EPPlus (recommended - add NuGet package EPPlus)
-            using (ExcelPackage package = new ExcelPackage(new FileInfo(filePath)))
-            {
-                ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
-
-                // Read headers
-                for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
-                {
-                    dt.Columns.Add(worksheet.Cells[1, col].Text);
-                }
-
-                // Read data rows
-                for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
-                {
-                    DataRow dr = dt.NewRow();
-                    for (int col = 1; col <= worksheet.Dimension.End.Column; col++)
-                    {
-                        dr[col - 1] = worksheet.Cells[row, col].Text;
-                    }
-                    dt.Rows.Add(dr);
-                }
-            }
-
-            return dt;
-        }
-
-        // Helper method to get or create barangay
-        private int GetOrCreateBarangay(string barangayName)
+        private int GetOrCreateBarangay(string barangayName, SqlConnection connection, SqlTransaction transaction)
         {
             string checkQuery = "SELECT BarangayID FROM Barangays WHERE BarangayName = @Name";
-            SqlParameter param = new SqlParameter("@Name", barangayName);
+            var param = new SqlParameter("@Name", barangayName);
 
             object result = dbHelper.ExecuteScalar(checkQuery, new SqlParameter[] { param });
 
@@ -274,65 +244,65 @@ namespace FamilyRegistrySystem
             }
         }
 
-        // Helper method to process imported data
-        private void ProcessImportedData(DataTable importedData, int barangayId)
+        private bool SaveHouseholdMember(DataRow row, int barangayId, SqlConnection connection, SqlTransaction transaction)
         {
-            foreach (DataRow row in importedData.Rows)
+            try
             {
-                try
+                // Required field validation
+                if (row["Household Number"] == DBNull.Value || row["Last Name"] == DBNull.Value)
                 {
-                    // Extract data from row (adjust column names as needed)
-                    string householdNumber = row["Household Number"].ToString();
-                    string rowIndicator = row["Row indicator"].ToString();
-                    string lastName = row["Last Name"].ToString();
-                    string firstName = row["First Name"].ToString();
-                    string middleName = row["Middle Name"].ToString();
-                    string relationship = row["E"].ToString(); // Assuming "E" column is relationship
-                    DateTime birthday = DateTime.Parse(row["Birthday"].ToString());
-                    string sex = row["Sex"].ToString().Split(' ')[0]; // Extract "Male"/"Female"
-                    string civilStatus = row["C.M."].ToString();
-
-                    // Insert or update household and family members
-                    // (Implement your specific database logic here)
-                    // Example:
-                    string householdQuery = @"IF NOT EXISTS (SELECT 1 FROM Households WHERE HouseholdNumber = @Number)
-                                    INSERT INTO Households (HouseholdNumber, BarangayID) 
-                                    VALUES (@Number, @BarangayID)";
-
-                    SqlParameter[] householdParams = {
-                new SqlParameter("@Number", householdNumber),
-                new SqlParameter("@BarangayID", barangayId)
-            };
-
-                    dbHelper.ExecuteNonQuery(householdQuery, householdParams);
-
-                    // Insert family member
-                    string memberQuery = @"INSERT INTO FamilyMembers 
-                                 (HouseholdNumber, IsHead, LastName, FirstName, MiddleName, 
-                                  Relationship, Birthday, Age, Sex, CivilStatus)
-                                 VALUES (@HouseholdNumber, @IsHead, @LastName, @FirstName, @MiddleName, 
-                                        @Relationship, @Birthday, @Age, @Sex, @CivilStatus)";
-
-                    SqlParameter[] memberParams = {
-                new SqlParameter("@HouseholdNumber", householdNumber),
-                new SqlParameter("@IsHead", rowIndicator == "Head"),
-                new SqlParameter("@LastName", lastName),
-                new SqlParameter("@FirstName", firstName),
-                new SqlParameter("@MiddleName", middleName),
-                new SqlParameter("@Relationship", relationship),
-                new SqlParameter("@Birthday", birthday),
-                new SqlParameter("@Age", CalculateAge(birthday)),
-                new SqlParameter("@Sex", sex),
-                new SqlParameter("@CivilStatus", civilStatus)
-            };
-
-                    dbHelper.ExecuteNonQuery(memberQuery, memberParams);
+                    Debug.WriteLine("Skipping row - missing required fields");
+                    return false;
                 }
-                catch (Exception ex)
+
+                string householdNumber = row["Household Number"].ToString();
+                string lastName = row["Last Name"].ToString();
+                string firstName = row["First Name"]?.ToString() ?? "";
+
+                // Debug: Show row being processed
+                Debug.WriteLine($"Processing: {householdNumber} - {lastName}, {firstName}");
+
+                // Insert household
+                string householdQuery = @"IF NOT EXISTS (SELECT 1 FROM Households WHERE HouseholdNumber = @Number)
+                               INSERT INTO Households (HouseholdNumber, BarangayID) 
+                               VALUES (@Number, @BarangayID)";
+
+                using (SqlCommand cmd = new SqlCommand(householdQuery, connection, transaction))
                 {
-                    // Log error but continue with next row
-                    Console.WriteLine($"Error processing row: {ex.Message}");
+                    cmd.Parameters.AddWithValue("@Number", householdNumber);
+                    cmd.Parameters.AddWithValue("@BarangayID", barangayId);
+                    cmd.ExecuteNonQuery();
                 }
+
+                // Insert member
+                string memberQuery = @"INSERT INTO FamilyMembers 
+                             (HouseholdNumber, IsHead, LastName, FirstName, MiddleName, 
+                              Relationship, Birthday, Age, Sex, CivilStatus)
+                             VALUES (@HouseholdNumber, @IsHead, @LastName, @FirstName, @MiddleName, 
+                                    @Relationship, @Birthday, @Age, @Sex, @CivilStatus)";
+
+                using (SqlCommand cmd = new SqlCommand(memberQuery, connection, transaction))
+                {
+                    // Add all parameters with null checks
+                    cmd.Parameters.AddWithValue("@HouseholdNumber", householdNumber);
+                    cmd.Parameters.AddWithValue("@IsHead", row["Row indicator"].ToString() == "Head");
+                    cmd.Parameters.AddWithValue("@LastName", lastName);
+                    cmd.Parameters.AddWithValue("@FirstName", firstName);
+                    cmd.Parameters.AddWithValue("@MiddleName", row["Middle Name"]?.ToString() ?? "");
+                    cmd.Parameters.AddWithValue("@Relationship", row["E"]?.ToString() ?? "");
+                    cmd.Parameters.AddWithValue("@Birthday", Convert.ToDateTime(row["Birthday"]));
+                    cmd.Parameters.AddWithValue("@Age", CalculateAge(Convert.ToDateTime(row["Birthday"])));
+                    cmd.Parameters.AddWithValue("@Sex", row["Sex"]?.ToString()?.Split(' ')[0] ?? "");
+                    cmd.Parameters.AddWithValue("@CivilStatus", row["C.M."]?.ToString() ?? "");
+
+                    cmd.ExecuteNonQuery();
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Error saving row: {ex.Message}");
+                return false;
             }
         }
 
@@ -342,6 +312,27 @@ namespace FamilyRegistrySystem
             int age = today.Year - birthday.Year;
             if (birthday.Date > today.AddYears(-age)) age--;
             return age;
+        }
+
+        private string GetConnectionString()
+        {
+            try
+            {
+                var connectionString = ConfigurationManager.ConnectionStrings["FamilyRegistrySystem.Properties.Settings.frs_dbConnectionString"]?.ConnectionString;
+
+                if (string.IsNullOrWhiteSpace(connectionString))
+                    throw new Exception("Connection string not found in config file");
+
+                // Verify the connection string format
+                new SqlConnectionStringBuilder(connectionString);
+
+                return connectionString;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Invalid connection string: {ex.Message}");
+                throw;
+            }
         }
     }
 }

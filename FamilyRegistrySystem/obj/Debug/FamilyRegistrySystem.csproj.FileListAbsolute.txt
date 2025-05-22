@@ -67,3 +67,12 @@ C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\System.Me
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\System.Security.Cryptography.Xml.xml
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\System.Data.OleDb.dll
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\System.Data.OleDb.xml
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\ExcelDataReader.DataSet.dll
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\ExcelDataReader.dll
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\ExcelDataReader.pdb
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\ExcelDataReader.xml
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\ExcelDataReader.DataSet.pdb
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\ExcelDataReader.DataSet.xml
+C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.Table.resources

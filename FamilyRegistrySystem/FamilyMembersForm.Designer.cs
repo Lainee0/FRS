@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.controlBox1 = new ReaLTaiizor.Controls.ControlBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnAddMember = new System.Windows.Forms.Button();
             this.btnEditMember = new System.Windows.Forms.Button();
             this.btnDeleteMember = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridViewMembers = new System.Windows.Forms.DataGridView();
-            this.controlBox1 = new ReaLTaiizor.Controls.ControlBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembers)).BeginInit();
             this.SuspendLayout();
@@ -50,6 +50,25 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(963, 36);
             this.panel1.TabIndex = 3;
+            // 
+            // controlBox1
+            // 
+            this.controlBox1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.controlBox1.CloseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
+            this.controlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.controlBox1.DefaultLocation = true;
+            this.controlBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.controlBox1.EnableHoverHighlight = true;
+            this.controlBox1.EnableMaximizeButton = true;
+            this.controlBox1.EnableMinimizeButton = true;
+            this.controlBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.controlBox1.Location = new System.Drawing.Point(873, 0);
+            this.controlBox1.MaximizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.controlBox1.MinimizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.controlBox1.Name = "controlBox1";
+            this.controlBox1.Size = new System.Drawing.Size(90, 25);
+            this.controlBox1.TabIndex = 1;
+            this.controlBox1.Text = "controlBox1";
             // 
             // label1
             // 
@@ -110,25 +129,6 @@
             this.dataGridViewMembers.Name = "dataGridViewMembers";
             this.dataGridViewMembers.Size = new System.Drawing.Size(936, 312);
             this.dataGridViewMembers.TabIndex = 8;
-            // 
-            // controlBox1
-            // 
-            this.controlBox1.BackColor = System.Drawing.Color.DarkSeaGreen;
-            this.controlBox1.CloseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
-            this.controlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.controlBox1.DefaultLocation = true;
-            this.controlBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.controlBox1.EnableHoverHighlight = true;
-            this.controlBox1.EnableMaximizeButton = true;
-            this.controlBox1.EnableMinimizeButton = true;
-            this.controlBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
-            this.controlBox1.Location = new System.Drawing.Point(873, 0);
-            this.controlBox1.MaximizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
-            this.controlBox1.MinimizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
-            this.controlBox1.Name = "controlBox1";
-            this.controlBox1.Size = new System.Drawing.Size(90, 25);
-            this.controlBox1.TabIndex = 1;
-            this.controlBox1.Text = "controlBox1";
             // 
             // FamilyMembersForm
             // 
