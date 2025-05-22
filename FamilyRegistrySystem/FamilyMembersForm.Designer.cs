@@ -35,30 +35,33 @@
             this.btnDeleteMember = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.dataGridViewMembers = new System.Windows.Forms.DataGridView();
+            this.controlBox1 = new ReaLTaiizor.Controls.ControlBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMembers)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.panel1.Controls.Add(this.controlBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(497, 36);
+            this.panel1.Size = new System.Drawing.Size(963, 36);
             this.panel1.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(337, 18);
+            this.label1.Size = new System.Drawing.Size(274, 18);
             this.label1.TabIndex = 0;
-            this.label1.Text = "FAMILY MEMBERS - HOUSEHOLD #00001";
+            this.label1.Text = "FAMILY MEMBERS - HOUSEHOLD";
             // 
             // btnAddMember
             // 
@@ -98,20 +101,40 @@
             this.button4.TabIndex = 7;
             this.button4.Text = "Back";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // dataGridViewMembers
             // 
             this.dataGridViewMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMembers.Location = new System.Drawing.Point(14, 106);
             this.dataGridViewMembers.Name = "dataGridViewMembers";
-            this.dataGridViewMembers.Size = new System.Drawing.Size(471, 312);
+            this.dataGridViewMembers.Size = new System.Drawing.Size(936, 312);
             this.dataGridViewMembers.TabIndex = 8;
+            // 
+            // controlBox1
+            // 
+            this.controlBox1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.controlBox1.CloseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
+            this.controlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.controlBox1.DefaultLocation = true;
+            this.controlBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.controlBox1.EnableHoverHighlight = true;
+            this.controlBox1.EnableMaximizeButton = true;
+            this.controlBox1.EnableMinimizeButton = true;
+            this.controlBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.controlBox1.Location = new System.Drawing.Point(873, 0);
+            this.controlBox1.MaximizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.controlBox1.MinimizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.controlBox1.Name = "controlBox1";
+            this.controlBox1.Size = new System.Drawing.Size(90, 25);
+            this.controlBox1.TabIndex = 1;
+            this.controlBox1.Text = "controlBox1";
             // 
             // FamilyMembersForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 430);
+            this.ClientSize = new System.Drawing.Size(963, 430);
             this.Controls.Add(this.dataGridViewMembers);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.btnDeleteMember);
@@ -138,5 +161,6 @@
         private System.Windows.Forms.Button btnDeleteMember;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.DataGridView dataGridViewMembers;
+        private ReaLTaiizor.Controls.ControlBox controlBox1;
     }
 }

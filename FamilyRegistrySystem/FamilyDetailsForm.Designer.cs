@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.cmbCivilStatus = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -49,28 +47,12 @@
             this.txtFirstName = new System.Windows.Forms.TextBox();
             this.txtLastName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.controlBox1 = new ReaLTaiizor.Controls.ControlBox();
             this.cmbSex = new System.Windows.Forms.ComboBox();
+            this.btnSave = new FontAwesome.Sharp.IconButton();
+            this.btnCancel = new FontAwesome.Sharp.IconButton();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(122, 388);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(89, 35);
-            this.button2.TabIndex = 45;
-            this.button2.Text = "Cancel";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Location = new System.Drawing.Point(25, 388);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(89, 35);
-            this.btnSave.TabIndex = 44;
-            this.btnSave.Text = "Save";
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // cmbCivilStatus
             // 
@@ -236,13 +218,14 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label1.BackColor = System.Drawing.Color.DarkSeaGreen;
             this.label1.Font = new System.Drawing.Font("Arial Rounded MT Bold", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(11, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(143, 18);
+            this.label1.Size = new System.Drawing.Size(194, 18);
             this.label1.TabIndex = 0;
-            this.label1.Text = "FAMILY DETAILS";
+            this.label1.Text = "FAMILY HEAD DETAILS";
             // 
             // txtFirstName
             // 
@@ -260,13 +243,33 @@
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.panel1.Controls.Add(this.controlBox1);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(497, 36);
             this.panel1.TabIndex = 24;
+            // 
+            // controlBox1
+            // 
+            this.controlBox1.BackColor = System.Drawing.Color.DarkSeaGreen;
+            this.controlBox1.CloseHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(230)))), ((int)(((byte)(17)))), ((int)(((byte)(35)))));
+            this.controlBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.controlBox1.DefaultLocation = true;
+            this.controlBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.controlBox1.EnableHoverHighlight = true;
+            this.controlBox1.EnableMaximizeButton = true;
+            this.controlBox1.EnableMinimizeButton = true;
+            this.controlBox1.ForeColor = System.Drawing.Color.WhiteSmoke;
+            this.controlBox1.Location = new System.Drawing.Point(407, 0);
+            this.controlBox1.MaximizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(74)))), ((int)(((byte)(74)))));
+            this.controlBox1.MinimizeHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(63)))), ((int)(((byte)(63)))), ((int)(((byte)(65)))));
+            this.controlBox1.Name = "controlBox1";
+            this.controlBox1.Size = new System.Drawing.Size(90, 25);
+            this.controlBox1.TabIndex = 1;
+            this.controlBox1.Text = "controlBox1";
             // 
             // cmbSex
             // 
@@ -279,14 +282,40 @@
             this.cmbSex.Size = new System.Drawing.Size(142, 21);
             this.cmbSex.TabIndex = 46;
             // 
+            // btnSave
+            // 
+            this.btnSave.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnSave.IconColor = System.Drawing.Color.Black;
+            this.btnSave.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnSave.Location = new System.Drawing.Point(25, 394);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(98, 39);
+            this.btnSave.TabIndex = 47;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.IconChar = FontAwesome.Sharp.IconChar.None;
+            this.btnCancel.IconColor = System.Drawing.Color.Black;
+            this.btnCancel.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.btnCancel.Location = new System.Drawing.Point(129, 394);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(98, 39);
+            this.btnCancel.TabIndex = 48;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
             // FamilyDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(497, 435);
-            this.Controls.Add(this.cmbSex);
-            this.Controls.Add(this.button2);
+            this.ClientSize = new System.Drawing.Size(497, 448);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnSave);
+            this.Controls.Add(this.cmbSex);
             this.Controls.Add(this.cmbCivilStatus);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
@@ -317,9 +346,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.ComboBox cmbCivilStatus;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -340,5 +366,8 @@
         private System.Windows.Forms.TextBox txtLastName;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox cmbSex;
+        private ReaLTaiizor.Controls.ControlBox controlBox1;
+        private FontAwesome.Sharp.IconButton btnSave;
+        private FontAwesome.Sharp.IconButton btnCancel;
     }
 }

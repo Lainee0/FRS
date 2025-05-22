@@ -135,6 +135,11 @@ namespace FamilyRegistrySystem
             return age;
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
         private bool ValidateForm()
         {
             // Add validation logic

@@ -170,5 +170,10 @@ namespace FamilyRegistrySystem
             // Add validation logic
             return true;
         }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
     }
 }
