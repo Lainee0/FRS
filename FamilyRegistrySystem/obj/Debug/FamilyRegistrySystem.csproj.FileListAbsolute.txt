@@ -52,7 +52,6 @@ C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\Syncfusio
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\Syncfusion.Tools.Windows.xml
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\obj\Debug\FamilyRegistrySystem.Dashboard.resources
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\EPPlus.dll
-C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\EPPlus.Interfaces.dll
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\System.Buffers.dll
 C:\Users\Administrator\source\repos\FRS\FamilyRegistrySystem\bin\Debug\System.ComponentModel.Annotations.dll

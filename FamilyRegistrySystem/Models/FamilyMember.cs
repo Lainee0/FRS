@@ -8,8 +8,9 @@ namespace FamilyRegistrySystem.Models
 {
     internal class FamilyMember
     {
+        public string S_I { get; set; }
         public int MemberID { get; set; }
-        public int HouseholdNumber { get; set; }
+        public string HouseholdNumber { get; set; }
         public bool IsHead { get; set; }
         public string RowIndicator { get; set; }
         public string LastName { get; set; }
@@ -20,5 +21,12 @@ namespace FamilyRegistrySystem.Models
         public int Age { get; set; }
         public string Sex { get; set; }
         public string CivilStatus { get; set; }
+
+        public bool IsValid()
+        {
+            return !string.IsNullOrWhiteSpace(HouseholdNumber) &&
+                   !string.IsNullOrWhiteSpace(LastName) &&
+                   !string.IsNullOrWhiteSpace(FirstName);
+        }
     }
 }

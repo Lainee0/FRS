@@ -38,6 +38,7 @@
             this.btnViewMembers = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
+            this.btnImport = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFamilies)).BeginInit();
             this.SuspendLayout();
@@ -136,11 +137,22 @@
             this.button5.Text = "Reports";
             this.button5.UseVisualStyleBackColor = true;
             // 
+            // btnImport
+            // 
+            this.btnImport.Location = new System.Drawing.Point(442, 439);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(101, 30);
+            this.btnImport.TabIndex = 11;
+            this.btnImport.Text = "Import Excel";
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(662, 481);
+            this.Controls.Add(this.btnImport);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.btnViewMembers);
@@ -150,10 +162,9 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.panel1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MainForm";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewFamilies)).EndInit();
@@ -174,5 +185,6 @@
         private System.Windows.Forms.Button btnViewMembers;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnImport;
     }
 }
